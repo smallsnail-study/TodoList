@@ -61,4 +61,21 @@ public enum TodoService {
         TodoDTO todoDTO = modelMapper.map(todoVO, TodoDTO.class);   // MOdelMapper를 이용해서 TodoDTO로 변환한다.
         return todoDTO;
     }
+
+    // 삭제 기능 구현
+    public void remove(Long tno) throws Exception {
+        // 번호(tno)만을 이용
+        log.info("tno: " + tno);
+        dao.deleteOne(tno);
+    }
+
+    // 수정 기능 구현
+    public void modify(TodoDTO todoDTO) throws Exception {
+        // TodoDTO타입을 파라미터로 이용한다.
+        log.info("todoDTO: " + todoDTO);
+
+        TodoVO todoVO = modelMapper.map(todoDTO, TodoVO.class);
+
+        dao.updateOne(todoVO);
+    }
 }
