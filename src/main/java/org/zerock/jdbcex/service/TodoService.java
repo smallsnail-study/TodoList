@@ -52,4 +52,13 @@ public enum TodoService {
         // TodoDAO를 이용해서 insert()를 실행하고 TodoVO를 등록
         dao.insert(todoVO); // int를 반환하므로 이를 이용해서 예외처리도 가능
     }
+
+    // 조회 기능 구현
+    public TodoDTO get(Long tno) throws Exception {     // TodoDTO를 반환한다.
+
+        log.info("tno: " + tno);
+        TodoVO todoVO = dao.selectOne(tno);     // TodoDAO의 selectOne()를 통해서 TodoVO 객체를 가져온다.
+        TodoDTO todoDTO = modelMapper.map(todoVO, TodoDTO.class);   // MOdelMapper를 이용해서 TodoDTO로 변환한다.
+        return todoDTO;
+    }
 }
